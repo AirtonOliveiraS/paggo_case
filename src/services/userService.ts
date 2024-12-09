@@ -6,7 +6,7 @@ export const createUser = async (name: string, email: string, password: string) 
   try {
     const token = localStorage.getItem("token");
     const response = await axios.post(
-      `${API_URL}/users`,
+      `${API_URL}users`,
       {
         name,
         email,
