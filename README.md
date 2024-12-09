@@ -16,15 +16,12 @@ $ cd paggo_case
 ```bash
 Duplique o arquivo .env.local e renomeio com .env e insira as variaveis de ambiente necessarias
 
-DATABASE_URL: estou usando o sqlite. entao por padrao = 
-JWT_SECRET:
-JWT_EXPIRE:
-
 ```
 
 
 
 ### Instalação
+
 
 ```bash
 npm install
