@@ -27,3 +27,31 @@ export const createFile = async (text: string, userId: string) => {
     );
   }
 };
+
+export const getFiles = async () => {
+  try {
+    
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
+    const response = await axios.get(
+      `${API_URL}/file/allfiles/?userId=${userId}`,
+     
+      {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "", 
+        },
+      }
+    );
+
+    return {
+      data: response.data, // Dados da resposta
+      status: response.status, // Código de status HTTP
+    };
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || "Erro ao tentar Buscar Arquivos"
+    );
+  }
+};
+

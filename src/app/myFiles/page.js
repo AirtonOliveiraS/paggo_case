@@ -2,18 +2,30 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
+import { getFiles } from "@/services/fileService";
 
 export default function MyFiles() {
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    // Dados falsos para teste
-    const mockFiles = [
-      { file: "documento1.pdf", date: "2024-12-01" },
-      { file: "imagem2.png", date: "2024-12-05" },
-      { file: "relatorio_final.docx", date: "2024-12-08" },
-    ];
-    setFiles(mockFiles);
+    const fetchFiles = async () => {
+      try {
+        const { data, status } = await getFiles();
+        
+        if (status === 200) {
+          // Transforme os dados para corresponder ao formato desejado
+          const formattedFiles = data.map((item) => ({
+            file: item.text,
+            date: new Date(item.createdAt).toLocaleDateString(), // Formata a data
+          }));
+          setFiles(formattedFiles);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar arquivos:", error);
+      }
+    };
+
+    fetchFiles();
   }, []);
 
   return (
@@ -22,7 +34,7 @@ export default function MyFiles() {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Arquivo</th>
+            <th>Texto da Imagem</th>
             <th>Data</th>
           </tr>
         </thead>

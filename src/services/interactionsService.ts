@@ -27,3 +27,30 @@ export const createInteraction = async (question: string,answer: string, userId:
     );
   }
 };
+
+export const getinteractions = async () => {
+  try {
+    
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
+    const response = await axios.get(
+      `${API_URL}/interaction/allinteractions/?userId=${userId}`,
+     
+      {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "", 
+        },
+      }
+    );
+
+    return {
+      data: response.data, // Dados da resposta
+      status: response.status, // Código de status HTTP
+    };
+  } catch (error: any) {
+    throw new Error(
+      error.response?.data?.message || "Erro ao tentar Buscar Interacoes"
+    );
+  }
+};
