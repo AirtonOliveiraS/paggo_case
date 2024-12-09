@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import Tesseract from "tesseract.js";
 import styles from "./page.module.css";
+import axios from "axios";
 import { createFile } from "@/services/fileService";
+import { createInteraction } from "@/services/interactionsService";
 
 export default function HomePage() {
   const [file, setFile] = useState(null);
@@ -83,10 +85,31 @@ export default function HomePage() {
         prompt: `Texto extraído: ${formattedResult}\nPergunta: ${question}`,
       });
 
-      setAnswer(response?.data?.result || "Nenhuma resposta encontrada.");
+      const answer = response?.data?.result || "Nenhuma resposta encontrada."
+      setAnswer(answer);
+      const userId = localStorage.getItem("userId");
+      await saveInteractionToDatabase(question, answer, userId);
     } catch (error) {
       console.error("Erro ao enviar pergunta:", error);
-      alert("Erro ao buscar resposta.");
+      
+    }
+  };
+
+  const saveInteractionToDatabase = async (
+    question,
+    answer,
+    userId
+  ) => {
+    try {
+      const { data, status } = await createInteraction(question, answer, userId);
+  
+      if (status >= 200) {
+        console.log("Interação salva no banco com sucesso");
+      } else {
+        console.error("Erro ao salvar a interação no banco.");
+      }
+    } catch (error) {
+      console.error("Erro ao salvar a interação no banco:", error);
     }
   };
 
