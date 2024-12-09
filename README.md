@@ -4,22 +4,29 @@
 ##### Clone o repositório:
 ```sh
 $ git clone https://github.com/AirtonOliveiraS/paggo_case.git
+```
 
 ##### Acesse a pasta :
 ```sh
 $ cd paggo_case
 ```
 ### Instalação
----
+
 
 ```bash
 npm install
 #&
 npm build 
-# or
+#&
 npm run dev
 
 ```
+
+
+## Variaveis
+-Duplique o arquivo .env.local e renomeio com .env e insira as variaveis de ambiente necessarias
+
+
 Abrir 
 [http://localhost:3000] (http://localhost:3000) para acompanhar o resultado.
 
