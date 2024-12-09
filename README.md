@@ -1,4 +1,4 @@
-# Case Paggo_OCR Front-End
+# Case Paggo OCR - Front-End
 
 
 ##### Clone o repositório:
