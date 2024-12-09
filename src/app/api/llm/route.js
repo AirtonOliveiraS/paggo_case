@@ -2,7 +2,7 @@ import OpenAI from "openai";
 
 // Configurar chave da OpenAI com variável de ambiente
 const openai = new OpenAI({
-  apiKey: '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'
+  apiKey: process.env.KEY_API_GPT  
 });
 
 export async function POST(req) {
