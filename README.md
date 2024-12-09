@@ -10,8 +10,17 @@ $ git clone https://github.com/AirtonOliveiraS/paggo_case.git
 ```sh
 $ cd paggo_case
 ```
-### Instalação
 
+## Variáveis de ambiente
+
+```bash
+Duplique o arquivo .env.local e renomeio com .env e insira as variaveis de ambiente necessarias
+
+```
+
+
+
+### Instalação
 
 ```bash
 npm install
@@ -22,9 +31,6 @@ npm run dev
 
 ```
 
-
-## Variaveis
--Duplique o arquivo .env.local e renomeio com .env e insira as variaveis de ambiente necessarias
 
 
 Abrir 
