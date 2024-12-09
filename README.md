@@ -26,9 +26,11 @@ Duplique o arquivo .env.local e renomeio com .env e insira as variaveis de ambie
 ```bash
 npm install
 #&
-npm build 
+npm run build 
 #&
 npm run dev
+#or
+npm run start
 
 ```
 
