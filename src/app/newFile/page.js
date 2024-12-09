@@ -1,19 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tesseract from "tesseract.js";
 import styles from "./page.module.css";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { createFile } from "@/services/fileService";
 import { createInteraction } from "@/services/interactionsService";
 
 export default function HomePage() {
+
+  const router = useRouter();
   const [file, setFile] = useState(null);
   const [ocrResult, setOcrResult] = useState("");
   const [formattedResult, setFormattedResult] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Você precisa estar logado para acessar esta página.");
+      router.push("/"); // Redireciona para a página de login
+    }
+  }, [router]);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -115,7 +126,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Enviar Arquivo e Perguntar ao LLM</h1>
+      <h1 className={styles.title}>Selecione uma imagem </h1>
 
       <div className={styles.formContainer}>
         {/* Campo de Upload */}
@@ -169,8 +180,22 @@ export default function HomePage() {
                 <p>{answer}</p>
               </div>
             )}
+
+             
           </div>
         )}
+         <button
+                onClick={() => router.push("/myFiles")}
+                className={styles.submitQuestionButton}
+              >
+                Meus Arquivos
+              </button>
+              <button
+                onClick={() => router.push("/myInteractions")}
+                className={styles.submitQuestionButton}
+              >
+                Minhas Interações 
+              </button>
       </div>
     </div>
   );

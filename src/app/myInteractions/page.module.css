@@ -48,3 +48,13 @@
   font-size: 14px;
   text-align: center;
 }
+
+.submitButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}

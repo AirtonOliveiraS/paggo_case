@@ -3,15 +3,17 @@
 import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { getFiles } from "@/services/fileService";
+import { useRouter } from "next/navigation";
 
 export default function MyFiles() {
+  const router = useRouter();
   const [files, setFiles] = useState([]);
 
   useEffect(() => {
     const fetchFiles = async () => {
       try {
         const { data, status } = await getFiles();
-        
+
         if (status === 200) {
           // Transforme os dados para corresponder ao formato desejado
           const formattedFiles = data.map((item) => ({
@@ -47,6 +49,12 @@ export default function MyFiles() {
           ))}
         </tbody>
       </table>
+      <button
+      onClick={() => router.push("/newFile")} 
+      className={styles.submitButton}
+    >
+      Voltar
+    </button>
     </div>
   );
 }
