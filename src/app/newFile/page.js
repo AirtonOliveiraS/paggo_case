@@ -106,6 +106,12 @@ export default function HomePage() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    router.push("/"); 
+  };
+
   const saveInteractionToDatabase = async (
     question,
     answer,
@@ -126,6 +132,13 @@ export default function HomePage() {
 
   return (
     <div className={styles.container}>
+       <button
+        onClick={handleLogout}
+        className={styles.logoutButton}
+        aria-label="Logout"
+      >
+        🚪 Logout
+      </button>
       <h1 className={styles.title}>Selecione uma imagem </h1>
 
       <div className={styles.formContainer}>
