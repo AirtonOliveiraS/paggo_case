@@ -8,7 +8,7 @@ export const createFile = async (text: string, userId: string) => {
     const token = localStorage.getItem("token");
 
     const response = await axios.post(
-      `${API_URL}/file`,
+      `${process.env.NEXT_PUBLIC_API_URL}/file`,
       { text, userId },
       {
         headers: {
@@ -35,7 +35,7 @@ export const getFiles = async () => {
     const token = localStorage.getItem("token");
 
     const response = await axios.get(
-      `${API_URL}/file/allfiles/?userId=${userId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/file/allfiles/?userId=${userId}`,
      
       {
         headers: {

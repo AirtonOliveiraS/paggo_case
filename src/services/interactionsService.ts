@@ -8,7 +8,7 @@ export const createInteraction = async (question: string,answer: string, userId:
     const token = localStorage.getItem("token");
 
     const response = await axios.post(
-      `${API_URL}/interaction`,
+      `${process.env.NEXT_PUBLIC_API_URL}/interaction`,
       { question, answer, userId },
       {
         headers: {
