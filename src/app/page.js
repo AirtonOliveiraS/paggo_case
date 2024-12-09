@@ -6,6 +6,7 @@ import axios from "axios";
 import styles from './page.module.css'; // Importando estilos CSS
 import { FaRegImage, FaFileAlt  } from "react-icons/fa";
 import { signIn } from "@/services/authService";
+
 export default function Login() {
   const router = useRouter();
 
@@ -13,6 +14,8 @@ export default function Login() {
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  
+
 
   // Função para fazer o login
   const handleLogin = async (event) => {
@@ -30,7 +33,8 @@ export default function Login() {
 
       if (status >= 200) {
         // Login bem-sucedido
-        localStorage.setItem("token", data.access_token); // Salva o token
+        localStorage.setItem("token", data.access_token); 
+        localStorage.setItem("userId", data.userId);// Salva o token
         router.push("/newFile"); // Redireciona para /newFile
       } else {
         setError("Erro inesperado. Tente novamente.");

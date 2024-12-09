@@ -2,30 +2,28 @@ import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
-export const createUser = async (name: string, email: string, password: string) => {
+export const createFile = async (text: string, userId: string) => {
   try {
+    // Recuperando o token do localStorage
     const token = localStorage.getItem("token");
+
     const response = await axios.post(
-      `${API_URL}/users`,
-      {
-        name,
-        email,
-        password,
-      },
+      `${API_URL}/file`,
+      { text, userId },
       {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : "", // Incluindo o token no cabeçalho
+          Authorization: token ? `Bearer ${token}` : "", // Configurando Bearer Token
         },
       }
     );
 
     return {
-      data: response.data,
-      status: response.status,
+      data: response.data, // Dados da resposta
+      status: response.status, // Código de status HTTP
     };
   } catch (error: any) {
-    console.error("Erro no serviço de criação de usuário:", error);
-    throw error;
+    throw new Error(
+      error.response?.data?.message || "Erro ao tentar Criar Arquivo"
+    );
   }
 };

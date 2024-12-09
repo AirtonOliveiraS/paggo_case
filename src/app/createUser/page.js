@@ -15,6 +15,7 @@ export default function UserCreate() {
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleCreate = async (event) => {
     event.preventDefault();
@@ -32,10 +33,10 @@ export default function UserCreate() {
 
       console.log("Resposta do servidor:", response);
 
-      if (response.status === 200) {
+      if (response.status >= 200) {
         setError("");
-        console.log("Usuário criado com sucesso");
-        router.push("/users");
+        setSuccessMessage("Usuário criado com sucesso!");
+        router.push("/");
       } else {
         setError("Erro ao criar usuário");
       }
@@ -51,7 +52,7 @@ export default function UserCreate() {
     <div className={styles.container}>
       <h1 className={styles.title}>Cadastro de Usuário</h1>
       <form onSubmit={handleCreate} className={styles.form}>
-        <Input
+        <input
           type="text"
           placeholder="Digite seu Nome"
           value={name}
@@ -61,7 +62,7 @@ export default function UserCreate() {
           }}
           className={styles.input}
         />
-        <Input
+        <input
           type="email"
           placeholder="Digite seu E-mail"
           value={email}
@@ -71,7 +72,7 @@ export default function UserCreate() {
           }}
           className={styles.input}
         />
-        <Input
+        <input
           type="password"
           placeholder="Digite sua Senha"
           value={senha}
@@ -82,6 +83,8 @@ export default function UserCreate() {
           className={styles.input}
         />
         {error && <p className={styles.error}>{error}</p>}
+        {successMessage && <p className={styles.success}>{successMessage}</p>}
+
 
         <Button
   Text={loading ? "Carregando..." : "Cadastrar"}

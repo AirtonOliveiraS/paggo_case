@@ -24,9 +24,9 @@
   .input {
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ddd;
+    
     border-radius: 4px;
-    color: #333
+    color: #120d0d
   }
   
   .error {
@@ -46,7 +46,7 @@
   .signup {
     font-size: 14px;
     text-align: center;
-    color: #c7bebe;
+    color: #e4d6d6;
   }
   
   .link {
@@ -55,3 +55,8 @@
     cursor: pointer;
   }
   
+  .success {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+  }

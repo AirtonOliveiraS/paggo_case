@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import Tesseract from "tesseract.js";
-import axios from "axios";
 import styles from "./page.module.css";
+import { createFile } from "@/services/fileService";
 
 export default function HomePage() {
   const [file, setFile] = useState(null);
@@ -21,9 +21,10 @@ export default function HomePage() {
   };
 
   const handleProcessOCR = async () => {
-    setAnswer("")
-    setFormattedResult("")
-    setQuestion("")
+    setAnswer("");
+    setFormattedResult("");
+    setQuestion("");
+
     if (!file) {
       alert("Por favor, selecione um arquivo antes de continuar.");
       return;
@@ -32,19 +33,42 @@ export default function HomePage() {
     setIsProcessing(true);
 
     try {
-      const { data } = await Tesseract.recognize(
-        file,
-        "por",
-        { logger: (info) => console.log(info) }
-      );
+      // Realiza o OCR
+      const { data } = await Tesseract.recognize(file, "por", {
+        logger: (info) => console.log(info),
+      });
 
       const cleanedText = data.text.replace(/\n+/g, " ").trim();
       setOcrResult(data.text);
       setFormattedResult(cleanedText);
+
+      // Envia o texto extraído para o banco
+      await saveTextToDatabase(cleanedText);
     } catch (error) {
       alert("Erro ao processar OCR.");
     } finally {
       setIsProcessing(false);
+    }
+  };
+  
+  const jwt = require('jsonwebtoken'); 
+  const saveTextToDatabase = async (text) => {
+    try {    
+      
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        alert("userId não encontrado. Faça login novamente.");
+        return;
+      }     
+
+      const { data, status } = await createFile(text, userId);
+      if (status >= 200) {
+        // Login bem-sucedido
+        console.log("Arquivo cadastrado com sucesso")
+      }
+    } catch (error) {
+      // console.error("Erro ao salvar texto no banco:", error);
+      
     }
   };
 
@@ -59,7 +83,6 @@ export default function HomePage() {
         prompt: `Texto extraído: ${formattedResult}\nPergunta: ${question}`,
       });
 
-      // Se a resposta não estiver vazia, atualize o estado com o resultado
       setAnswer(response?.data?.result || "Nenhuma resposta encontrada.");
     } catch (error) {
       console.error("Erro ao enviar pergunta:", error);
