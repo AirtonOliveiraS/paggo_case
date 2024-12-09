@@ -10,7 +10,7 @@
   
   .title {
     font-size: 24px;
-    color: #333;
+    color: #c5bbbb;
   }
   
   .form {
@@ -42,5 +42,16 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+  }
+  .signup {
+    font-size: 14px;
+    text-align: center;
+    color: #c7bebe;
+  }
+  
+  .link {
+    color: #0070f3;
+    text-decoration: underline;
+    cursor: pointer;
   }
   

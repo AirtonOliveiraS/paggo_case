@@ -5,13 +5,14 @@ import { useRouter } from "next/navigation";
 import axios from "axios"; 
 import styles from './page.module.css'; // Importando estilos CSS
 import { FaRegImage, FaFileAlt  } from "react-icons/fa";
-
+import { signIn } from "@/services/authService";
 export default function Login() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Função para fazer o login
   const handleLogin = async (event) => {
@@ -22,19 +23,23 @@ export default function Login() {
       return;
     }
 
+    setLoading(true);
+
     try {
-      console.log("Dados enviados:", { email, senha });
+      const { data, status } = await signIn(email, senha);
 
-      const response = 1; // Simulação de sucesso para testes
-
-      if (response === 1) {
-        router.push("/newFile");
+      if (status >= 200) {
+        // Login bem-sucedido
+        localStorage.setItem("token", data.access_token); // Salva o token
+        router.push("/newFile"); // Redireciona para /newFile
       } else {
-        setError("Email ou senha inválidos");
+        setError("Erro inesperado. Tente novamente.");
       }
-    } catch (error) {
-      console.error("Erro ao tentar fazer login:", error);
-      setError("Erro ao tentar fazer login, tente novamente.");
+    } catch (err) {
+      console.error("Erro ao tentar fazer login:", err.message);
+      setError(err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
