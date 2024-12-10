@@ -22,7 +22,7 @@ export default function HomePage() {
     const token = localStorage.getItem("token");
     if (!token) {
       alert("Você precisa estar logado para acessar esta página.");
-      router.push("/"); // Redireciona para a página de login
+      router.push("/");
     }
   }, [router]);
 
@@ -46,7 +46,7 @@ export default function HomePage() {
     setIsProcessing(true);
 
     try {
-      // Realiza o OCR
+    
       const { data } = await Tesseract.recognize(file, "por", {
         logger: (info) => console.log(info),
       });
@@ -55,7 +55,7 @@ export default function HomePage() {
       setOcrResult(data.text);
       setFormattedResult(cleanedText);
 
-      // Envia o texto extraído para o banco
+      
       await saveTextToDatabase(cleanedText);
     } catch (error) {
       alert("Erro ao processar OCR.");
@@ -76,7 +76,7 @@ export default function HomePage() {
 
       const { data, status } = await createFile(text, userId);
       if (status >= 200) {
-        // Login bem-sucedido
+        
         console.log("Arquivo cadastrado com sucesso")
       }
     } catch (error) {
@@ -142,7 +142,7 @@ export default function HomePage() {
       <h1 className={styles.title}>Selecione uma imagem </h1>
 
       <div className={styles.formContainer}>
-        {/* Campo de Upload */}
+        {/*  Upload da imagem/arquivo*/}
         <input
           type="file"
           accept="image/*"
@@ -150,7 +150,7 @@ export default function HomePage() {
           className={styles.inputFile}
         />
 
-        {/* Botão para processar OCR */}
+        
         <button
           onClick={handleProcessOCR}
           className={styles.submitButton}
@@ -159,7 +159,7 @@ export default function HomePage() {
           {isProcessing ? "Processando..." : "Processar OCR"}
         </button>
 
-        {/* Exibição do resultado OCR */}
+       
         {formattedResult && (
           <div className={styles.ocrResultContainer}>
             <h4>Texto OCR Extraído:</h4>
@@ -169,7 +169,7 @@ export default function HomePage() {
               className={styles.resultText}
             />
 
-            {/* Campo para fazer perguntas */}
+            
             <div className={styles.questionContainer}>
               <input
                 type="text"
@@ -186,10 +186,10 @@ export default function HomePage() {
               </button>
             </div>
 
-            {/* Resposta do LLM */}
+            
             {answer && (
               <div className={styles.answerContainer}>
-                <h4>Resposta da LLM:</h4>
+                <h4>Resposta:</h4>
                 <p>{answer}</p>
               </div>
             )}

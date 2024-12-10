@@ -6,8 +6,8 @@ export const signIn = async (email: string, password: string) => {
   try {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/signIn`, { email, password });
     return {
-      data: response.data,   // Dados da resposta
-      status: response.status, // Código de status HTTP
+      data: response.data,   
+      status: response.status, 
     };
   } catch (error: any) {
     throw new Error(

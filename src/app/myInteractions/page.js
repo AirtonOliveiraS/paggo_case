@@ -15,12 +15,12 @@ export default function MyInteractions() {
       try {
         const { data, status } = await getinteractions();
 
-        if (status => 200) {
-          // Transforme os dados para corresponder ao formato desejado
+        if (status >= 200) {
+          
           const formattedFiles = data.map((item) => ({
             question: item.question,
             answer: item.answer,
-            date: new Date(item.createdAt).toLocaleDateString(), // Formata a data
+            date: new Date(item.createdAt).toLocaleDateString(), 
           }));
           setInteractions(formattedFiles);
           console.log(formattedFiles)

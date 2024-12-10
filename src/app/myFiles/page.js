@@ -14,11 +14,11 @@ export default function MyFiles() {
       try {
         const { data, status } = await getFiles();
 
-        if (status === 200) {
-          // Transforme os dados para corresponder ao formato desejado
+        if (status >= 200) {
+          
           const formattedFiles = data.map((item) => ({
             file: item.text,
-            date: new Date(item.createdAt).toLocaleDateString(), // Formata a data
+            date: new Date(item.createdAt).toLocaleDateString(), 
           }));
           setFiles(formattedFiles);
         }

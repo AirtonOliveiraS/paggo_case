@@ -4,7 +4,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 export const createFile = async (text: string, userId: string) => {
   try {
-    // Recuperando o token do localStorage
+    
     const token = localStorage.getItem("token");
 
     const response = await axios.post(
@@ -12,14 +12,14 @@ export const createFile = async (text: string, userId: string) => {
       { text, userId },
       {
         headers: {
-          Authorization: token ? `Bearer ${token}` : "", // Configurando Bearer Token
+          Authorization: token ? `Bearer ${token}` : "", 
         },
       }
     );
 
     return {
-      data: response.data, // Dados da resposta
-      status: response.status, // Código de status HTTP
+      data: response.data, 
+      status: response.status, 
     };
   } catch (error: any) {
     throw new Error(
@@ -45,8 +45,8 @@ export const getFiles = async () => {
     );
 
     return {
-      data: response.data, // Dados da resposta
-      status: response.status, // Código de status HTTP
+      data: response.data, 
+      status: response.status, 
     };
   } catch (error: any) {
     throw new Error(

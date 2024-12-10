@@ -87,10 +87,10 @@ export default function UserCreate() {
 
 
         <Button
-  Text={loading ? "Carregando..." : "Cadastrar"}
-  onClick={handleCreate}
-  className={styles.button}
-/>
+          Text={loading ? "Carregando..." : "Cadastrar"}
+          onClick={handleCreate}
+          className={styles.button}
+        />
       </form>
 
       <p className={styles.signup}>

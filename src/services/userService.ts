@@ -15,7 +15,7 @@ export const createUser = async (name: string, email: string, password: string) 
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : "", // Incluindo o token no cabeçalho
+          Authorization: token ? `Bearer ${token}` : "", 
         },
       }
     );

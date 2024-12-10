@@ -4,7 +4,7 @@
   justify-content: center;
   flex-direction: column;
   height: 100vh;
-  background-color: #fff; /* Fundo branco */
+  background-color: #fff; 
   gap: 20px;
   font-family: Arial, sans-serif;
   padding: 10px;
@@ -16,13 +16,13 @@
 }
 
 .table {
-  width: 80%; /* Ajuste a largura conforme necessário */
+  width: 80%; 
   border-collapse: collapse;
   margin: 20px 0;
 }
 
 .table th {
-  background-color: #0056b3; /* Cabeçalho azul */
+  background-color: #0056b3; 
   color: white;
   padding: 10px;
   text-align: left;
